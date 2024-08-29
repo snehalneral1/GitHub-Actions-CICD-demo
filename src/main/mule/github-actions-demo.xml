@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="c0f6640c-cc1b-4afc-ad18-95824f7e1808" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="github-actions-demoFlow" doc:id="b69d8f00-0876-4611-af49-53d8c3e71433" >
+		<http:listener doc:name="Listener" doc:id="9833a092-bcb5-4ee2-83e4-c26995feab98" config-ref="HTTP_Listener_config" path="/test"/>
+		<set-payload value='#[%dw 2.0&#10;output application/json&#10;---&#10;{&#10;	"msg" : "mule api deployed on cloudhub"&#10;}]' doc:name="Set Payload" doc:id="daa10bbe-5d71-42fa-ae40-b14556dbdf5b" />
+		<logger level="INFO" doc:name="Logger" doc:id="0f562f1e-9008-4db0-8920-f81879195c98" />
+	</flow>
+</mule>
